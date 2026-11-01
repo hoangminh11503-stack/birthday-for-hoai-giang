@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Hoài Giang 🎉</title>
+  
+  <!-- SEO & Social Meta (Xem trước cực đẹp khi gửi qua Zalo, Messenger, iMessage) -->
+  <meta name="description" content="Thiệp chúc mừng sinh nhật online đặc biệt dành tặng chị Hoài Giang. Chúc chị tuổi mới luôn rạng rỡ, may mắn và hạnh phúc!">
+  <meta property="og:title" content="Happy Birthday Chị Hoài Giang! 🎂✨">
+  <meta property="og:description" content="Mở thiệp để nhận món quà sinh nhật online lung linh và những lời chúc tốt đẹp nhất!">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#1a0324">
+
+  <!-- Google Fonts: Hỗ trợ tiếng Việt đầy đủ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Hệ thống Canvas hiệu ứng nền (Hoa hồng & cánh hoa 3D, Sao lấp lánh & Bụi vàng) -->
+  <canvas id="sparkleCanvas"></canvas>
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- Lớp bướm bay 3D vỗ cánh trong không gian -->
+  <div id="butterflyGarden" class="butterfly-container" aria-hidden="true"></div>
+
+  <!-- Nút điều khiển âm thanh nổi góc trên bên phải -->
+  <div class="audio-control-wrapper">
+    <button id="musicToggleBtn" class="music-toggle-btn" aria-label="Bật hoặc tắt nhạc nền" title="Bật / Tắt nhạc">
+      <div class="music-icon-disc">
+        <svg viewBox="0 0 24 24" class="disc-svg">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+          <path d="M12 2 A10 10 0 0 1 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="equalizer-bars">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+      </div>
+      <span class="music-btn-label">Âm nhạc</span>
+    </button>
+  </div>
+
+  <!-- Nhạc nền sinh nhật: ưu tiên file cục bộ trong assets, hỗ trợ fallback CDN & Web Audio synth -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/birthday.wav" type="audio/wav">
+    <source src="assets/music.mp3" type="audio/mpeg">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-guitar-chords-and-whistle-483.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ==============================================
+       MÀN HÌNH CHÀO (WELCOME / COVER SCREEN)
+       ============================================== -->
+  <section id="coverScreen" class="cover-screen">
+    <div class="cover-glow-backdrop"></div>
+    
+    <div class="cover-content">
+      <!-- Tag trang trí mạ vàng -->
+      <div class="luxury-badge">
+        <span class="badge-icon">✦</span>
+        <span class="badge-text">SPECIAL BIRTHDAY CARD</span>
+        <span class="badge-icon">✦</span>
+      </div>
+
+      <!-- Tiêu đề lớn màn chào -->
+      <div class="cover-typography">
+        <p class="cover-sub-greeting">Thiệp Chúc Mừng Sinh Nhật</p>
+        <h2 class="cover-greeting">Happy Birthday</h2>
+        <h1 class="cover-recipient-name">
+          <span class="name-shimmer">Hoài Giang</span>
+        </h1>
+      </div>
+
+      <!-- Hộp quà phát sáng tương tác -->
+      <div class="gift-box-teaser" id="teaserBox" title="Chạm để mở thiệp!">
+        <div class="teaser-glow"></div>
+        <div class="gift-icon-wrap">
+          <svg class="gift-svg" viewBox="0 0 64 64" fill="none">
+            <!-- Nắp hộp -->
+            <path d="M8 20C8 17.79 9.79 16 12 16H52C54.21 16 56 17.79 56 20V26H8V20Z" fill="url(#giftGrad1)"/>
+            <!-- Thân hộp -->
+            <path d="M12 26H52V52C52 54.21 50.21 56 48 56H16C13.79 56 12 54.21 12 52V26Z" fill="url(#giftGrad2)"/>
+            <!-- Ruy băng đứng -->
+            <path d="M28 16H36V56H28V16Z" fill="url(#goldGrad)"/>
+            <!-- Ruy băng ngang -->
+            <path d="M8 22H56V26H8V22Z" fill="url(#goldGrad)"/>
+            <!-- Nơ mạ vàng -->
+            <path d="M32 16C28 10 20 8 18 12C16 16 26 16 32 16Z" fill="url(#ribbonGrad)"/>
+            <path d="M32 16C36 10 44 8 46 12C48 16 38 16 32 16Z" fill="url(#ribbonGrad)"/>
+            <circle cx="32" cy="16" r="3" fill="#FFE57F"/>
+            <defs>
+              <linearGradient id="giftGrad1" x1="8" y1="16" x2="56" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FF3377"/>
+                <stop offset="1" stop-color="#FF66A5"/>
+              </linearGradient>
+              <linearGradient id="giftGrad2" x1="12" y1="26" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#B31255"/>
+                <stop offset="1" stop-color="#7A0035"/>
+              </linearGradient>
+              <linearGradient id="goldGrad" x1="28" y1="16" x2="36" y2="56" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFE082"/>
+                <stop offset="0.5" stop-color="#FFD54F"/>
+                <stop offset="1" stop-color="#FFB300"/>
+              </linearGradient>
+              <linearGradient id="ribbonGrad" x1="16" y1="8" x2="48" y2="16" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFF3C4"/>
+                <stop offset="1" stop-color="#FFC107"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <p class="cover-invitation-text">
+        Một món quà sinh nhật online lung linh đang chờ đón chị...
+      </p>
+
+      <!-- Nút "Mở thiệp" hoàng gia -->
+      <button id="openCardBtn" class="luxury-open-btn">
+        <span class="btn-stars-left">✨</span>
+        <span class="btn-text">Mở Thiệp</span>
+        <span class="btn-stars-right">✨</span>
+        <div class="btn-light-wave"></div>
+      </button>
+
+      <div class="cover-hint">
+        <span>👆 Nhấp vào nút để mở thiệp & hòa cùng giai điệu</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================================
+       THIỆP CHÍNH (MAIN BIRTHDAY CARD)
+       ============================================== -->
+  <main id="mainCardContainer" class="main-card-container hidden">
+    <div class="card-wrapper" id="cardWrapper">
+
+      <!-- Họa tiết góc mạ vàng hoàng gia -->
+      <div class="corner-filigree corner-top-left" aria-hidden="true">
+        <svg viewBox="0 0 60 60"><path d="M0,0 L60,0 C40,0 20,20 20,40 L20,60 L0,60 Z" fill="url(#goldCornerGrad)" opacity="0.65"/></svg>
+      </div>
+      <div class="corner-filigree corner-top-right" aria-hidden="true">
+        <svg viewBox="0 0 60 60"><path d="M0,0 L60,0 C40,0 20,20 20,40 L20,60 L0,60 Z" fill="url(#goldCornerGrad)" opacity="0.65"/></svg>
+      </div>
+      <div class="corner-filigree corner-bottom-left" aria-hidden="true">
+        <svg viewBox="0 0 60 60"><path d="M0,0 L60,0 C40,0 20,20 20,40 L20,60 L0,60 Z" fill="url(#goldCornerGrad)" opacity="0.65"/></svg>
+      </div>
+      <div class="corner-filigree corner-bottom-right" aria-hidden="true">
+        <svg viewBox="0 0 60 60"><path d="M0,0 L60,0 C40,0 20,20 20,40 L20,60 L0,60 Z" fill="url(#goldCornerGrad)" opacity="0.65"/></svg>
+      </div>
+
+      <svg width="0" height="0">
+        <defs>
+          <linearGradient id="goldCornerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFDF73" />
+            <stop offset="50%" stop-color="#D4AF37" />
+            <stop offset="100%" stop-color="#AA771C" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Nội dung bên trong tấm thiệp -->
+      <article class="birthday-card">
+        
+        <!-- Header thiệp -->
+        <header class="card-header">
+          <div class="crown-badge">
+            <span class="crown-icon">👑</span>
+            <span class="crown-sub">SPECIAL DAY</span>
+          </div>
+
+          <!-- Tiêu đề lớn: Happy Birthday Hoài Giang -->
+          <h1 class="card-main-title">
+            <span class="title-sub">Happy Birthday</span>
+            <span class="title-name">Hoài Giang</span>
+          </h1>
+
+          <div class="title-divider">
+            <span class="divider-line"></span>
+            <span class="divider-star">✦ 🌸 ✦</span>
+            <span class="divider-line"></span>
+          </div>
+        </header>
+
+        <!-- Bánh sinh nhật tương tác (Có thể thổi nến) -->
+        <section class="cake-section" id="cakeSection" title="Nhấn vào bánh để thổi nến và ước nguyện!">
+          <div class="interactive-cake">
+            <!-- 3 ngọn nến lung linh -->
+            <div class="candles-wrapper">
+              <div class="candle candle-1">
+                <div class="flame" id="flame1"></div>
+                <div class="smoke" id="smoke1"></div>
+                <div class="candle-stick"></div>
+              </div>
+              <div class="candle candle-center candle-2">
+                <div class="flame" id="flame2"></div>
+                <div class="smoke" id="smoke2"></div>
+                <div class="candle-stick"></div>
+              </div>
+              <div class="candle candle-3">
+                <div class="flame" id="flame3"></div>
+                <div class="smoke" id="smoke3"></div>
+                <div class="candle-stick"></div>
+              </div>
+            </div>
+
+            <!-- Thân bánh 2 tầng sang trọng -->
+            <div class="cake-layer cake-layer-top">
+              <div class="icing-decorations">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <div class="cherry-row">🍒 🍓 🍒</div>
+            </div>
+            <div class="cake-layer cake-layer-bottom">
+              <div class="cake-pattern"></div>
+            </div>
+            <div class="cake-plate"></div>
+          </div>
+
+          <!-- Nút bấm thổi nến -->
+          <button id="blowCandleBtn" class="cake-hint-btn">
+            <span class="candle-icon">🕯️</span>
+            <span id="blowCandleText">Nhấn để Thổi Nến & Ước Nguyện</span>
+          </button>
+          
+          <div id="wishToast" class="wish-toast hidden">
+            🌟 Ước nguyện đã được gửi tới các vì sao! Chúc mọi điều ước của chị Hoài Giang đều thành hiện thực! ✨
+          </div>
+        </section>
+
+        <!-- Lời chúc chính trên thiệp -->
+        <section class="card-wishes-body">
+          <div class="wish-quote-icon">“</div>
+          
+          <div class="wish-content-box">
+            <p class="greeting-lead">
+              Chúc mừng sinh nhật chị <strong class="name-highlight">Hoài Giang</strong>!
+            </p>
+            
+            <p class="wish-paragraph">
+              Chúc chị tuổi mới luôn vui vẻ, xinh đẹp, nhiều sức khỏe, gặp nhiều may mắn và mọi chuyện đều thuận lợi.
+            </p>
+            
+            <p class="wish-paragraph">
+              Chúc chị ngày càng thành công, luôn rạng rỡ, tiền vô như nước và có một ngày sinh nhật thật vui nha!
+            </p>
+          </div>
+
+          <div class="wish-quote-icon quote-end">”</div>
+
+          <!-- Dòng kết thúc nghệ thuật -->
+          <footer class="card-footer-msg">
+            <p class="farewell-text">Have a wonderful birthday!</p>
+            <div class="footer-sparkles">✨ 💖 🌸 💖 ✨</div>
+          </footer>
+        </section>
+
+        <!-- Thanh công cụ tương tác dưới cùng -->
+        <div class="card-actions">
+          <button id="moreButterfliesBtn" class="action-btn" title="Thả thêm bươm bướm & cánh hoa bay lượn">
+            <span class="btn-icon">🦋</span>
+            <span>Thả Thêm Bướm & Hoa</span>
+          </button>
+          <button id="fireConfettiBtn" class="action-btn" title="Bắn pháo hoa giấy chúc mừng">
+            <span class="btn-icon">🎉</span>
+            <span>Bắn Pháo Hoa</span>
+          </button>
+          <button id="replayBtn" class="action-btn action-btn-sub" title="Mở lại từ đầu">
+            <span class="btn-icon">💌</span>
+            <span>Xem Lại Màn Chào</span>
+          </button>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

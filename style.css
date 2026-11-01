@@ -1,0 +1,1137 @@
+/* ===================================================================
+   HAPPY BIRTHDAY HOÀI GIANG - LUXURY GREETING STYLESHEET
+   Phong cách: Luxury, Artistic, Fantasy, Colorful, Elegant, Eye-Catching
+   =================================================================== */
+
+:root {
+  --primary-gold: #f5cf74;
+  --secondary-gold: #d4af37;
+  --bright-gold: #ffe79a;
+  --primary-pink: #ff3377;
+  --rose-pink: #ff6ea7;
+  --soft-pink: #ffe6f0;
+  --wine-dark: #14021a;
+  --wine-mid: #2b0838;
+  --wine-light: #440d54;
+  --card-bg: rgba(36, 9, 46, 0.76);
+  --card-border: rgba(255, 215, 115, 0.45);
+  --gold-glow: 0 0 25px rgba(255, 215, 100, 0.45);
+  --pink-glow: 0 0 30px rgba(255, 60, 130, 0.4);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-cursive: 'Dancing Script', cursive;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--wine-dark);
+  font-family: var(--font-body);
+  color: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background: 
+    radial-gradient(circle at 50% 15%, rgba(138, 28, 115, 0.45) 0%, transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(220, 20, 60, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 90% 85%, rgba(186, 85, 211, 0.3) 0%, transparent 50%),
+    linear-gradient(160deg, #100115 0%, #26052f 40%, #15021c 100%);
+  background-attachment: fixed;
+}
+
+/* ===================================================================
+   CANVAS LAYERS (Hoa hồng rơi & Sao bụi vàng lấp lánh)
+   =================================================================== */
+#sparkleCanvas, #petalCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#sparkleCanvas {
+  z-index: 1;
+}
+
+#petalCanvas {
+  z-index: 10;
+}
+
+/* ===================================================================
+   VƯỜN BƯỚM 3D (3D BUTTERFLIES)
+   =================================================================== */
+.butterfly-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 15;
+  overflow: hidden;
+}
+
+.butterfly {
+  position: absolute;
+  width: 48px;
+  height: 38px;
+  perspective: 600px;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  pointer-events: none;
+  will-change: transform;
+}
+
+.butterfly-wings-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.b-wing {
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 38px;
+  backface-visibility: hidden;
+}
+
+.b-wing-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.b-wing-left {
+  left: 0;
+  transform-origin: right center;
+  animation: flapLeft 0.22s infinite alternate ease-in-out;
+}
+
+.b-wing-right {
+  right: 0;
+  transform-origin: left center;
+  animation: flapRight 0.22s infinite alternate ease-in-out;
+}
+
+.b-body {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: 4px;
+  height: 24px;
+  background: #2a0b1c;
+  border-radius: 4px;
+  transform: translateX(-50%);
+  box-shadow: 0 0 6px rgba(255, 230, 150, 0.85);
+  z-index: 2;
+}
+
+.b-antennae {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.antenna {
+  position: absolute;
+  width: 1.5px;
+  height: 9px;
+  background: #ffea9f;
+  border-radius: 1px;
+}
+
+.antenna-left {
+  left: 3px;
+  transform: rotate(-25deg);
+  transform-origin: bottom center;
+}
+
+.antenna-right {
+  right: 3px;
+  transform: rotate(25deg);
+  transform-origin: bottom center;
+}
+
+.antenna::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -1px;
+  width: 3.5px;
+  height: 3.5px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffd700;
+}
+
+@keyframes flapLeft {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(70deg); }
+}
+
+@keyframes flapRight {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-70deg); }
+}
+
+/* ===================================================================
+   NÚT ÂM NHẠC NỔI GÓC PHẢI
+   =================================================================== */
+.audio-control-wrapper {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 100;
+}
+
+.music-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 215, 120, 0.45);
+  background: rgba(35, 10, 45, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--bright-gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), var(--gold-glow);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.music-toggle-btn:hover {
+  transform: scale(1.06);
+  border-color: var(--bright-gold);
+  background: rgba(55, 15, 70, 0.85);
+}
+
+.music-icon-disc {
+  width: 22px;
+  height: 22px;
+  color: var(--primary-gold);
+}
+
+.music-icon-disc svg {
+  width: 100%;
+  height: 100%;
+  animation: spinDisc 3s linear infinite paused;
+}
+
+.music-toggle-btn.playing .music-icon-disc svg {
+  animation-play-state: running;
+}
+
+@keyframes spinDisc {
+  100% { transform: rotate(360deg); }
+}
+
+.equalizer-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+}
+
+.equalizer-bars .bar {
+  width: 3px;
+  height: 4px;
+  background: linear-gradient(to top, var(--primary-gold), var(--rose-pink));
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.music-toggle-btn.playing .bar-1 {
+  animation: equalize 0.7s infinite alternate ease-in-out;
+}
+.music-toggle-btn.playing .bar-2 {
+  animation: equalize 0.5s 0.2s infinite alternate ease-in-out;
+}
+.music-toggle-btn.playing .bar-3 {
+  animation: equalize 0.8s 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes equalize {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
+
+.music-btn-label {
+  letter-spacing: 0.5px;
+  font-size: 0.78rem;
+}
+
+/* ===================================================================
+   MÀN HÌNH CHÀO (COVER SCREEN)
+   =================================================================== */
+.cover-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 20px;
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.8s;
+}
+
+.cover-screen.fade-out {
+  opacity: 0;
+  transform: scale(1.12);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cover-glow-backdrop {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(255, 60, 140, 0.38) 0%, rgba(255, 215, 100, 0.18) 50%, transparent 75%);
+  filter: blur(55px);
+  border-radius: 50%;
+  animation: pulseGlow 4s infinite alternate ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+.cover-content {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.luxury-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 20px;
+  background: rgba(255, 215, 120, 0.12);
+  border: 1px solid rgba(255, 215, 120, 0.4);
+  color: var(--bright-gold);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  box-shadow: 0 0 15px rgba(255, 215, 100, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.cover-typography {
+  margin-bottom: 20px;
+}
+
+.cover-sub-greeting {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--rose-pink);
+  margin-bottom: 8px;
+  opacity: 0.95;
+}
+
+.cover-greeting {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 6.5vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 15px rgba(255, 110, 167, 0.6), 0 0 30px rgba(255, 215, 120, 0.3);
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.cover-recipient-name {
+  font-family: var(--font-cursive);
+  font-size: clamp(3.4rem, 11.5vw, 5.4rem);
+  font-weight: 700;
+  margin-top: 5px;
+  line-height: 1.15;
+}
+
+.name-shimmer {
+  background: linear-gradient(135deg, #fff 0%, #ffe082 25%, #ff52a2 50%, #ffe082 75%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shineGold 4s linear infinite;
+  display: inline-block;
+  filter: drop-shadow(0 4px 20px rgba(255, 82, 162, 0.55));
+}
+
+@keyframes shineGold {
+  to { background-position: 200% center; }
+}
+
+/* Hộp quà teaser */
+.gift-box-teaser {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 10px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: floatTeaser 3s ease-in-out infinite;
+}
+
+@keyframes floatTeaser {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+.gift-icon-wrap {
+  width: 76px;
+  height: 76px;
+  filter: drop-shadow(0 8px 24px rgba(255, 51, 119, 0.55));
+}
+
+.gift-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cover-invitation-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #f7d9e8;
+  max-width: 340px;
+  margin-bottom: 28px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Nút "Mở thiệp" hoàng gia */
+.luxury-open-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 42px;
+  font-size: 1.25rem;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #2b0838;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #fff2be 0%, #ffd56b 40%, #fca311 100%);
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(255, 180, 0, 0.4),
+              0 0 40px rgba(255, 51, 119, 0.35),
+              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: btnPulse 2.5s infinite;
+}
+
+@keyframes btnPulse {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(255, 180, 0, 0.4), 0 0 35px rgba(255, 51, 119, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 15px 45px rgba(255, 215, 0, 0.7), 0 0 55px rgba(255, 51, 119, 0.6);
+    transform: scale(1.04);
+  }
+}
+
+.luxury-open-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 18px 45px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 51, 119, 0.7);
+}
+
+.luxury-open-btn:active {
+  transform: scale(0.97);
+}
+
+.btn-light-wave {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  transform: skewX(-25deg);
+  animation: waveLight 3s infinite ease-in-out;
+}
+
+@keyframes waveLight {
+  0% { left: -150%; }
+  60%, 100% { left: 150%; }
+}
+
+.btn-stars-left, .btn-stars-right {
+  font-size: 1.1rem;
+  animation: rotateStar 3s linear infinite;
+}
+
+@keyframes rotateStar {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cover-hint {
+  margin-top: 22px;
+  font-size: 0.82rem;
+  color: rgba(255, 230, 240, 0.7);
+  letter-spacing: 0.5px;
+}
+
+/* ===================================================================
+   THIỆP CHÍNH (MAIN CARD CONTAINER)
+   =================================================================== */
+.main-card-container {
+  position: relative;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 65px 18px 40px;
+  z-index: 20;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+
+.main-card-container.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 28px;
+  border: 1.5px solid var(--card-border);
+  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.6),
+              0 0 50px rgba(255, 51, 119, 0.25),
+              inset 0 0 35px rgba(255, 215, 115, 0.12);
+  padding: 40px 32px 36px;
+  animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: center center;
+  overflow: hidden;
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Họa tiết góc mạ vàng hoàng gia */
+.corner-filigree {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.corner-filigree svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px rgba(255, 215, 100, 0.5));
+}
+
+.corner-top-left { top: 12px; left: 12px; }
+.corner-top-right { top: 12px; right: 12px; transform: scaleX(-1); }
+.corner-bottom-left { bottom: 12px; left: 12px; transform: scaleY(-1); }
+.corner-bottom-right { bottom: 12px; right: 12px; transform: scale(-1); }
+
+/* BÊN TRONG THIỆP */
+.birthday-card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* HEADER THIỆP */
+.card-header {
+  margin-bottom: 24px;
+}
+
+.crown-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  background: rgba(255, 215, 100, 0.12);
+  border: 1px solid rgba(255, 215, 100, 0.35);
+  margin-bottom: 12px;
+}
+
+.crown-icon {
+  font-size: 0.95rem;
+}
+
+.crown-sub {
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: var(--bright-gold);
+}
+
+.card-main-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.title-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.title-name {
+  font-family: var(--font-cursive);
+  font-size: clamp(3rem, 9vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #fff7d6 0%, #ffd54f 25%, #ff529a 60%, #ffe082 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 18px rgba(255, 82, 154, 0.55));
+}
+
+.title-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 115, 0.6), transparent);
+}
+
+.divider-star {
+  font-size: 0.85rem;
+  color: var(--bright-gold);
+  letter-spacing: 4px;
+}
+
+/* ===================================================================
+   BÁNH SINH NHẬT TƯƠNG TÁC (INTERACTIVE CAKE)
+   =================================================================== */
+.cake-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 26px;
+  cursor: pointer;
+}
+
+.interactive-cake {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 0;
+  transition: transform 0.3s ease;
+}
+
+.interactive-cake:hover {
+  transform: scale(1.05);
+}
+
+.candles-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: -2px;
+  z-index: 5;
+}
+
+.candle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.candle-stick {
+  width: 7px;
+  height: 28px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ffffff,
+    #ffffff 4px,
+    #ff4081 4px,
+    #ff4081 8px
+  );
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.candle-center .candle-stick {
+  height: 34px;
+  width: 8px;
+  background: repeating-linear-gradient(
+    45deg,
+    #fff9c4,
+    #fff9c4 4px,
+    #ffb300 4px,
+    #ffb300 8px
+  );
+}
+
+.flame {
+  width: 11px;
+  height: 20px;
+  background: linear-gradient(to bottom, #ffffff 0%, #fff176 25%, #ff9800 60%, #e65100 100%);
+  border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+  box-shadow: 0 0 14px rgba(255, 165, 0, 0.9), 0 0 26px rgba(255, 235, 59, 0.6);
+  animation: flameFlicker 0.16s infinite alternate ease-in-out;
+  transform-origin: center bottom;
+  margin-bottom: 2px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.candle-center .flame {
+  width: 13px;
+  height: 23px;
+  animation-duration: 0.12s;
+}
+
+@keyframes flameFlicker {
+  0% {
+    transform: scale(1) rotate(-2deg);
+    filter: drop-shadow(0 0 8px #ffb300);
+  }
+  100% {
+    transform: scale(1.12, 0.92) rotate(2deg);
+    filter: drop-shadow(0 0 14px #ff5722);
+  }
+}
+
+.flame.extinguished {
+  opacity: 0;
+  transform: scale(0.2);
+  animation: none;
+}
+
+.smoke {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background: rgba(220, 220, 220, 0.7);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.smoke.puff {
+  animation: smokeRise 1.2s forwards ease-out;
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-35px) scale(3.5);
+  }
+}
+
+/* Các tầng bánh */
+.cake-layer {
+  position: relative;
+  border-radius: 10px 10px 4px 4px;
+}
+
+.cake-layer-top {
+  width: 120px;
+  height: 38px;
+  background: linear-gradient(to bottom, #ff7eb3, #ff5287);
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 4;
+}
+
+.cherry-row {
+  position: absolute;
+  top: -10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.95rem;
+}
+
+.icing-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.icing-decorations span {
+  width: 18px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.cake-layer-bottom {
+  width: 160px;
+  height: 48px;
+  background: linear-gradient(to bottom, #ffe082, #ffb300);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: inset 0 3px 6px rgba(255, 255, 255, 0.5), 0 6px 14px rgba(0, 0, 0, 0.35);
+  z-index: 3;
+  margin-top: -3px;
+  overflow: hidden;
+}
+
+.cake-pattern {
+  position: absolute;
+  top: 14px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, #ff4081, #ff4081 12px, transparent 12px, transparent 20px);
+  opacity: 0.6;
+}
+
+.cake-plate {
+  width: 195px;
+  height: 10px;
+  background: linear-gradient(to right, #e0e0e0, #ffffff, #cfcfcf);
+  border-radius: 10px;
+  margin-top: -2px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+
+.cake-hint-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px dashed rgba(255, 215, 120, 0.6);
+  background: rgba(255, 215, 120, 0.1);
+  color: var(--bright-gold);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cake-hint-btn:hover {
+  background: rgba(255, 215, 120, 0.22);
+  transform: translateY(-2px);
+}
+
+.wish-toast {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 110, 167, 0.3), rgba(255, 215, 100, 0.3));
+  border: 1px solid rgba(255, 215, 100, 0.6);
+  color: #fff9e6;
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: 0 4px 20px rgba(255, 105, 180, 0.35);
+  animation: toastPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wish-toast.hidden {
+  display: none;
+}
+
+@keyframes toastPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ===================================================================
+   LỜI CHÚC CHÍNH (WISHES BODY)
+   =================================================================== */
+.card-wishes-body {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 10px 0 26px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 215, 120, 0.2);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.wish-quote-icon {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  line-height: 1;
+  color: rgba(255, 215, 120, 0.4);
+  text-align: left;
+  margin-bottom: -10px;
+}
+
+.quote-end {
+  text-align: right;
+  margin-top: -10px;
+  margin-bottom: 0;
+}
+
+.wish-content-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 6px 0;
+}
+
+.greeting-lead {
+  font-size: clamp(1.15rem, 3.2vw, 1.35rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+}
+
+.name-highlight {
+  color: var(--primary-gold);
+  text-shadow: 0 0 10px rgba(255, 215, 100, 0.5);
+  font-weight: 700;
+}
+
+.wish-paragraph {
+  font-size: clamp(0.96rem, 2.6vw, 1.1rem);
+  line-height: 1.75;
+  color: #fae8f2;
+  font-weight: 400;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.card-footer-msg {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed rgba(255, 215, 120, 0.25);
+}
+
+.farewell-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--bright-gold);
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(255, 215, 100, 0.6);
+}
+
+.footer-sparkles {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  letter-spacing: 6px;
+}
+
+/* ===================================================================
+   CÁC NÚT TƯƠNG TÁC DƯỚI THIỆP
+   =================================================================== */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 215, 120, 0.4);
+  background: linear-gradient(135deg, rgba(255, 110, 167, 0.25), rgba(255, 215, 100, 0.2));
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: linear-gradient(135deg, rgba(255, 110, 167, 0.4), rgba(255, 215, 100, 0.35));
+  border-color: var(--bright-gold);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.35);
+}
+
+.action-btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.action-btn-sub {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ecd7e4;
+}
+
+.action-btn-sub:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-icon {
+  font-size: 1.05rem;
+}
+
+.confetti-piece {
+  will-change: transform, opacity;
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN (TỐI ƯU MOBILE FIRST)
+   =================================================================== */
+@media (max-width: 600px) {
+  .main-card-container {
+    padding: 60px 12px 30px;
+  }
+
+  .card-wrapper {
+    padding: 32px 18px 26px;
+    border-radius: 22px;
+  }
+
+  .corner-filigree {
+    width: 36px;
+    height: 36px;
+  }
+
+  .corner-top-left { top: 8px; left: 8px; }
+  .corner-top-right { top: 8px; right: 8px; }
+  .corner-bottom-left { bottom: 8px; left: 8px; }
+  .corner-bottom-right { bottom: 8px; right: 8px; }
+
+  .card-wishes-body {
+    padding: 18px 16px;
+  }
+
+  .wish-content-box {
+    gap: 12px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+  }
+
+  .luxury-open-btn {
+    padding: 15px 32px;
+    font-size: 1.15rem;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .audio-control-wrapper {
+    top: 14px;
+    right: 14px;
+  }
+
+  .music-btn-label {
+    display: none; /* Giữ nút gọn gàng trên màn hình nhỏ */
+  }
+
+  .music-toggle-btn {
+    padding: 8px 10px;
+  }
+}
+
+@media (min-width: 900px) {
+  .card-wrapper {
+    max-width: 720px;
+    padding: 48px 42px 42px;
+  }
+
+  .greeting-lead {
+    font-size: 1.35rem;
+  }
+
+  .wish-paragraph {
+    font-size: 1.12rem;
+  }
+}
